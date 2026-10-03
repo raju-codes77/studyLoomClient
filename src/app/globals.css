@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Main Backgrounds */
+  --color-canvas: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F8F7F4;
+  --color-surface-pink: #FDF2F4;
+  --color-surface-lavender: #F5F1FF;
+
+  /* Primary Accent Colors */
+  --color-pink-primary: #FF8DA1;
+  --color-pink-dark: #F4728B;
+  --color-lavender-primary: #8B5CF6;
+  --color-lavender-soft: #A78BFA;
+  --color-blue-primary: #60A5FA;
+  --color-sky: #38BDF8;
+
+  /* Typography */
+  --color-text-primary: #1E1E2F;
+  --color-text-secondary: #64748B;
+  --color-text-muted: #94A3B8;
+
+  /* Supporting colors */
+  --color-cream: #FFF9F2;
+  --color-peach: #FDBA9A;
+  --color-yellow: #F59E0B;
+  --color-green: #86C7A5;
+}
+
+:root {
+  --background: #FAF9F6;
+  --foreground: #1E1E2F;
+  --font-editorial: var(--font-playfair), serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Kept dark mode variables for safety, though app is light-focused */
+    --background: #1e1e2f;
+    --foreground: #faf9f6;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base utility for glassmorphism */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-radius: 28px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px rgba(139, 92, 246, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.font-editorial {
+  font-family: var(--font-playfair), serif;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-pink-primary), var(--color-lavender-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
