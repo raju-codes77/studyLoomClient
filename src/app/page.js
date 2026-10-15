@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { Bell, Home, Calendar, CheckSquare, User, Play, Pause, Flame, Target, LogIn, UserPlus, Users, BookOpen, ArrowRight, Heart } from "lucide-react";
+import { Bell, Home, Calendar, CheckSquare, User, Play, Pause, Flame, Target, LogIn, UserPlus, Users, BookOpen, ArrowRight, Heart, Sparkles, CheckCircle2, Award, Clock, Star, ShieldCheck, Compass, GraduationCap, ChevronRight } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import Link from "next/link";
 
@@ -86,34 +86,89 @@ export default function StudyBloomDashboard() {
           { opacity: 1, x: 0, rotation: 0, duration: 1.2, ease: "power3.out", stagger: 0.2, delay: 0.5 }
         );
         
-        // Scroll animations for features
-        gsap.fromTo(".feature-card",
-          { opacity: 0, y: 40 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.8, 
-            stagger: 0.1, 
-            ease: "back.out(1.2)",
+        // Section Scroll Reveals
+        gsap.utils.toArray(".gsap-reveal-up").forEach((el) => {
+          gsap.fromTo(el, 
+            { opacity: 0, y: 35 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.9, 
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none"
+              }
+            }
+          );
+        });
+
+        // Staggered Steps Animation
+        gsap.fromTo(".step-card",
+          { opacity: 0, y: 30, scale: 0.96 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.1)",
             scrollTrigger: {
-              trigger: ".features-section",
+              trigger: ".steps-container",
               start: "top 80%",
+              toggleActions: "play none none none"
             }
           }
         );
 
-        // Scroll animations for community section
-        gsap.fromTo(".community-stat",
-          { opacity: 0, scale: 0.8 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.15,
+        // Feature cards reveal
+        gsap.fromTo(".studybloom-feature-card",
+          { opacity: 0, y: 35 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.7, 
+            stagger: 0.15, 
             ease: "power3.out",
             scrollTrigger: {
-              trigger: ".community-section",
+              trigger: ".studybloom-features-grid",
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+
+        // Dashboard mock reveal
+        gsap.fromTo(".dashboard-preview-card",
+          { opacity: 0, y: 40, scale: 0.97 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".dashboard-preview-section",
               start: "top 75%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+
+        // Testimonial cards reveal
+        gsap.fromTo(".testimonial-card",
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".testimonials-grid",
+              start: "top 80%",
+              toggleActions: "play none none none"
             }
           }
         );
@@ -523,173 +578,525 @@ export default function StudyBloomDashboard() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <div 
-          className="features-section relative z-10 w-full px-12 py-24 mx-auto text-center border-t border-white/40 mt-12 bg-white/60 backdrop-blur-md bg-cover bg-center"
-          style={{ backgroundImage: "url('/bg.png')", backgroundBlendMode: "overlay" }}
+
+
+        {/* ========================================================================= */}
+        {/* SECTION B — FEATURES (Uses /images/studybloom/features-floral-bg.webp)     */}
+        {/* ========================================================================= */}
+        <section 
+          id="features"
+          className="studybloom-features-section relative z-10 w-full px-8 lg:px-14 py-28 bg-cover bg-center overflow-hidden border-t border-white/40"
+          style={{ 
+            backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.88)), url('/images/studybloom/features-floral-bg.webp')" 
+          }}
         >
-          <div className="max-w-[1440px] mx-auto">
-            <div className="inline-block bg-[#FFF0F5] text-[#FF758C] px-4 py-1.5 rounded-full text-xs font-bold mb-4 border border-white/50">
-              Why StudyBloom?
+          <div className="max-w-[1320px] mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 bg-[#FFF0F5] text-[#FF758C] px-4 py-1.5 rounded-full text-xs font-bold mb-4 border border-pink-100 shadow-xs uppercase tracking-wider gsap-reveal-up">
+              Why StudyBloom
             </div>
-            <h2 className="text-4xl font-bold text-[#1D1B20] mb-4 tracking-tight">Everything You Need to Succeed</h2>
-            <p className="text-gray-600 font-medium mb-16 max-w-xl mx-auto drop-shadow-sm">
-              A complete study ecosystem designed for your growth, focus and well-being.
+            
+            <h2 className="text-3xl lg:text-5xl font-serif text-[#1D1B20] tracking-tight mb-4 gsap-reveal-up">
+              Everything You Need for Academic Success
+            </h2>
+            
+            <p className="text-gray-600 font-normal text-base lg:text-lg max-w-2xl mx-auto mb-16 leading-relaxed gsap-reveal-up">
+              Powerful tools designed to help you study smarter, stay organized, and reach your goals.
             </p>
 
-            <div className="grid grid-cols-5 gap-8 text-left">
+            <div className="studybloom-features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
               {[
-                { icon: '📅', title: 'Smart Routine', desc: 'Plan your day with a personalized study schedule and never miss a session again.', color: 'text-pink-500' },
-                { icon: '🎯', title: 'Focus Timer', desc: 'Eliminate distractions and stay in the zone with our Pomodoro-style timer.', color: 'text-purple-500' },
-                { icon: '📊', title: 'Progress Analytics', desc: 'Track your performance, see your growth and stay motivated.', color: 'text-blue-500' },
-                { icon: '💗', title: 'Mental Wellness', desc: 'Take care of your mind with break reminders, positive boosts and self-care tips.', color: 'text-rose-400' },
-                { icon: '⭐', title: 'Goal Achievement', desc: 'Set your dreams, break them down and watch yourself bloom.', color: 'text-amber-400' },
-              ].map((feature, i) => (
-                 <div key={i} className="feature-card flex flex-col gap-3">
-                   <div className={`w-12 h-12 rounded-2xl bg-white/80 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-white flex items-center justify-center text-xl ${feature.color}`}>
-                     {feature.icon}
-                   </div>
-                   <h3 className="font-bold text-[#1D1B20] text-lg">{feature.title}</h3>
-                   <p className="text-xs text-gray-600 leading-relaxed font-medium">{feature.desc}</p>
-                 </div>
+                {
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="4" x2="20" y1="21" y2="21"/>
+                      <line x1="4" x2="20" y1="10" y2="10"/>
+                      <line x1="12" x2="12" y1="3" y2="21"/>
+                    </svg>
+                  ),
+                  iconBg: "bg-[#FFF0F5] text-[#FF758C] border-pink-100",
+                  title: "Smart Study Planner",
+                  description: "Intelligent daily schedules that automatically adjust to your exam timeline and natural study rhythm.",
+                  tag: "Routine & Schedule"
+                },
+                {
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polygon points="12 8 8 12 12 16 16 12 12 8"/>
+                    </svg>
+                  ),
+                  iconBg: "bg-[#F5F2FE] text-[#8B5CF6] border-purple-100",
+                  title: "AI Study Assistant",
+                  description: "Instant personalized summaries, doubt resolution, and flashcard generation tailored to your curriculum.",
+                  tag: "24/7 Companion"
+                },
+                {
+                  icon: <Calendar className="w-5 h-5" />,
+                  iconBg: "bg-[#FDF2F8] text-[#EC4899] border-pink-100",
+                  title: "Class & Exam Tracker",
+                  description: "Never miss an assignment deadline or coaching session with synchronized syllabus countdowns.",
+                  tag: "Milestone Alerts"
+                },
+                {
+                  icon: <BookOpen className="w-5 h-5" />,
+                  iconBg: "bg-[#FFF7ED] text-[#F97316] border-orange-100",
+                  title: "Notes & Resources",
+                  description: "A centralized digital binder for all textbook chapters, coaching notes, formulas, and revision materials.",
+                  tag: "Curated Hub"
+                }
+              ].map((feat, idx) => (
+                <div 
+                  key={idx}
+                  className="studybloom-feature-card bg-white/90 backdrop-blur-xl rounded-[28px] p-7 border border-white/80 shadow-[0_12px_36px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_45px_rgba(255,117,140,0.12)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-xs ${feat.iconBg}`}>
+                        {feat.icon}
+                      </div>
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{feat.tag}</span>
+                    </div>
+
+                    <h3 className="font-bold text-xl text-[#1D1B20] mb-2.5 group-hover:text-[#FF758C] transition-colors">
+                      {feat.title}
+                    </h3>
+                    
+                    <p className="text-sm text-gray-600 leading-relaxed font-normal">
+                      {feat.description}
+                    </p>
+                  </div>
+
+                  <Link 
+                    href="/signup" 
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF758C] hover:text-[#ff5c77] mt-6 pt-4 border-t border-gray-100/80 transition-colors group/link"
+                  >
+                    <span>Learn More</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               ))}
             </div>
-
-            <div className="mt-20 font-editorial italic text-xl text-gray-500 drop-shadow-sm">
-              A better you, one study session at a time. 🌸
-            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Community & Study Stats Section */}
-        <div className="community-section relative z-10 w-full px-12 py-24 bg-[#FCFAFA] border-t border-white/40 overflow-hidden">
-          {/* Subtle floral background elements */}
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#FFF0F5]/50 to-transparent pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#F5F1FF]/50 to-transparent pointer-events-none" />
-          
-          <div className="max-w-[1200px] mx-auto flex items-center justify-between gap-16 relative z-10">
-            <div className="w-1/2 flex flex-col items-start text-left">
-              <div className="inline-flex items-center gap-2 bg-white border border-gray-100 shadow-sm px-4 py-1.5 rounded-full text-xs font-bold text-[#8B5CF6] mb-6">
-                <Users className="w-4 h-4" /> Join The Virtual Library
-              </div>
-              <h2 className="text-[40px] leading-[1.15] font-bold text-[#1D1B20] mb-6 tracking-tight">
-                You are never studying alone.
-              </h2>
-              <p className="text-lg text-gray-500 mb-8 max-w-md leading-relaxed font-medium">
-                Enter our immersive virtual study rooms. Turn on Zen mode, join thousands of students worldwide, and multiply your focus through shared accountability.
-              </p>
-              
-              <ul className="flex flex-col gap-4 mb-10">
-                {[
-                  "Live Pomodoro synchronisation with peers",
-                  "Ambient study sounds & lo-fi beats built-in",
-                  "Strict distraction blocking during deep work"
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-gray-700 font-medium">
-                    <div className="w-6 h-6 rounded-full bg-[#FFF0F5] text-[#FF758C] flex items-center justify-center">
-                      <CheckSquare className="w-3 h-3" />
-                    </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              
-              <button className="flex items-center gap-2 text-[#FF758C] font-bold hover:gap-4 transition-all">
-                Explore Virtual Libraries <ArrowRight className="w-5 h-5" />
-              </button>
+        {/* ========================================================================= */}
+        {/* SECTION C — HOW IT WORKS (Uses /images/studybloom/how-it-works-bg.webp)   */}
+        {/* ========================================================================= */}
+        <section 
+          id="study-plan"
+          className="how-it-works-section relative z-10 w-full px-8 lg:px-14 py-28 bg-cover bg-center overflow-hidden border-t border-white/40"
+          style={{ 
+            backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.9)), url('/images/studybloom/how-it-works-bg.webp')" 
+          }}
+        >
+          <div className="max-w-[1320px] mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 bg-[#F5F1FF] text-[#8B5CF6] px-4 py-1.5 rounded-full text-xs font-bold mb-4 border border-purple-100 shadow-xs uppercase tracking-wider gsap-reveal-up">
+              Simple 3-Step Routine
             </div>
 
-            <div className="w-1/2 grid grid-cols-2 gap-6 relative">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-200 rounded-full blur-[80px] opacity-40 -z-10" />
-              
-              <div className="community-stat bg-white/80 backdrop-blur-xl p-8 rounded-3xl border border-white shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col items-center justify-center transform translate-y-8">
-                <h3 className="text-4xl font-black text-[#1D1B20] mb-2 tracking-tight">12k+</h3>
-                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest text-center">Active<br/>Students</p>
-              </div>
-              
-              <div className="community-stat bg-gradient-to-br from-[#FF758C] to-[#FF7EB3] p-8 rounded-3xl border border-pink-300 shadow-[0_10px_40px_rgba(255,117,140,0.2)] flex flex-col items-center justify-center text-white">
-                <h3 className="text-4xl font-black mb-2 tracking-tight">2M+</h3>
-                <p className="text-sm font-bold uppercase tracking-widest text-pink-100 text-center">Hours<br/>Focused</p>
-              </div>
-              
-              <div className="community-stat bg-white/80 backdrop-blur-xl p-8 rounded-3xl border border-white shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col items-center justify-center col-span-2 mx-12">
-                <div className="flex -space-x-3 mb-4">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className={`w-10 h-10 rounded-full border-2 border-white flex items-center justify-center text-xs bg-gray-100`}>
-                      🧑‍🎓
+            <h2 className="text-3xl lg:text-5xl font-serif text-[#1D1B20] tracking-tight mb-4 gsap-reveal-up">
+              How It Works
+            </h2>
+
+            <p className="text-gray-600 font-normal text-base lg:text-lg max-w-2xl mx-auto mb-16 leading-relaxed gsap-reveal-up">
+              Get started in just a few simple steps and build your perfect study routine.
+            </p>
+
+            {/* Steps Container */}
+            <div className="steps-container grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+              {[
+                {
+                  step: "01",
+                  title: "Set Your Goals",
+                  subtitle: "Define exams & targets",
+                  description: "Input your upcoming exam dates, target grades, subjects, and available hours per week.",
+                  accent: "from-[#FF758C] to-[#FFA07A]",
+                  badgeColor: "bg-[#FFF0F5] text-[#FF758C]"
+                },
+                {
+                  step: "02",
+                  title: "Build Your Plan",
+                  subtitle: "Personalized smart schedule",
+                  description: "Our algorithm crafts a balanced, gentle routine tailored around your coaching classes and breaks.",
+                  accent: "from-[#B072D9] to-[#8B5CF6]",
+                  badgeColor: "bg-[#F5F2FE] text-[#8B5CF6]"
+                },
+                {
+                  step: "03",
+                  title: "Track & Improve",
+                  subtitle: "Bloom with daily consistency",
+                  description: "Check off sessions, monitor your mastery percentage, and watch your confidence flourish every week.",
+                  accent: "from-[#EC4899] to-[#FF758C]",
+                  badgeColor: "bg-[#FDF2F8] text-[#EC4899]"
+                }
+              ].map((item, idx) => (
+                <div 
+                  key={idx}
+                  className="step-card relative bg-white/95 backdrop-blur-xl rounded-[32px] p-8 border border-white/80 shadow-[0_12px_36px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(139,92,246,0.12)] hover:-translate-y-2 transition-all duration-300 text-left flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Top Step Number Header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-base shadow-sm bg-gradient-to-br ${item.accent} text-white`}>
+                        {item.step}
+                      </div>
+                      <span className={`text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider ${item.badgeColor}`}>
+                        {item.subtitle}
+                      </span>
                     </div>
-                  ))}
-                  <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-50 flex items-center justify-center text-xs font-bold text-gray-400">
-                    +99
+
+                    <h3 className="text-2xl font-serif text-[#1D1B20] font-bold mb-3 group-hover:text-[#FF758C] transition-colors">
+                      {item.title}
+                    </h3>
+                    
+                    <p className="text-sm text-gray-600 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-gray-400">
+                    <span>Phase {item.step} of 03</span>
+                    <span className="text-[#FF758C]">→</span>
                   </div>
                 </div>
-                <p className="text-sm font-bold text-[#1D1B20]">Studying Physics right now</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* SECTION D — STUDY PROGRESS PREVIEW (Uses /images/studybloom/dashboard-atmosphere.webp) */}
+        {/* ========================================================================= */}
+        <section 
+          id="progress-preview"
+          className="dashboard-preview-section relative z-10 w-full px-8 lg:px-14 py-28 bg-cover bg-center overflow-hidden border-t border-white/40"
+          style={{ 
+            backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.88)), url('/images/studybloom/dashboard-atmosphere.webp')" 
+          }}
+        >
+          <div className="max-w-[1320px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-18 relative z-10">
+            {/* Left Content Side */}
+            <div className="w-full lg:w-5/12 flex flex-col items-start text-left gsap-reveal-up">
+              <div className="inline-flex items-center gap-2 bg-[#FFF0F5] text-[#FF758C] px-4 py-1.5 rounded-full text-xs font-bold mb-4 border border-pink-100 shadow-xs uppercase tracking-wider">
+                Comprehensive Dashboard
+              </div>
+              
+              <h2 className="text-3xl lg:text-5xl font-serif text-[#1D1B20] tracking-tight leading-[1.15] mb-5">
+                Your Study Progress
+              </h2>
+              
+              <p className="text-gray-600 font-normal text-base lg:text-lg leading-relaxed mb-8">
+                See how you&apos;re doing with your study plan, track your subjects, and review your recent sessions — all in one beautiful dashboard.
+              </p>
+
+              <div className="space-y-4 mb-8 w-full">
+                <div className="flex items-start gap-3 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/70 shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-pink-100 text-[#FF758C] flex items-center justify-center shrink-0 mt-0.5">
+                    <Target className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-gray-800 leading-tight">Mastery by Subject</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Real-time percentage tracking for Math, Physics, Chemistry, and English.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/70 shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-purple-100 text-[#8B5CF6] flex items-center justify-center shrink-0 mt-0.5">
+                    <Flame className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-gray-800 leading-tight">Consistency Streaks</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Celebrate daily milestones and maintain study momentum without burnout.</p>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                href="/signup"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#FF758C] to-[#8B5CF6] text-white font-semibold text-sm shadow-md shadow-pink-200/50 hover:shadow-lg hover:scale-105 transition-all group"
+              >
+                <span>Explore Dashboard</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
+            {/* Right Dashboard Mock Visual Presentation */}
+            <div className="w-full lg:w-7/12 relative">
+              <div className="dashboard-preview-card relative z-10 bg-white/95 backdrop-blur-2xl rounded-[32px] p-6 lg:p-7 shadow-[0_25px_60px_rgba(139,92,246,0.12)] border border-white/80">
+                {/* Header bar */}
+                <div className="flex justify-between items-center pb-5 mb-5 border-b border-gray-100">
+                  <div className="flex items-center gap-2.5">
+                    <Logo className="w-7 h-7" iconSize="w-4 h-4" />
+                    <div>
+                      <h4 className="text-xs font-bold text-gray-800 leading-tight">StudyBloom Student Portal</h4>
+                      <p className="text-[10px] text-gray-400">SSC Examination Preparation 2026</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 bg-[#FFF0F5] text-[#FF758C] px-3 py-1 rounded-full text-xs font-bold">
+                    <span>🔥</span> 14 Day Streak
+                  </div>
+                </div>
+
+                {/* Dashboard preview grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                  <div className="bg-[#FFF3F5] rounded-2xl p-4 border border-pink-100">
+                    <span className="text-[10px] font-bold text-[#FF758C] uppercase tracking-wider block mb-1">Weekly Target</span>
+                    <span className="text-2xl font-bold text-gray-800">28.5 hrs</span>
+                    <span className="text-[11px] text-gray-500 block mt-0.5">85% of weekly goal</span>
+                  </div>
+                  <div className="bg-[#F5F2FE] rounded-2xl p-4 border border-purple-100">
+                    <span className="text-[10px] font-bold text-[#8B5CF6] uppercase tracking-wider block mb-1">Top Subject</span>
+                    <span className="text-2xl font-bold text-gray-800">Science</span>
+                    <span className="text-[11px] text-gray-500 block mt-0.5">90% mastery rate</span>
+                  </div>
+                  <div className="bg-[#FFF7ED] rounded-2xl p-4 border border-orange-100">
+                    <span className="text-[10px] font-bold text-[#F97316] uppercase tracking-wider block mb-1">Focus Sessions</span>
+                    <span className="text-2xl font-bold text-gray-800">42</span>
+                    <span className="text-[11px] text-gray-500 block mt-0.5">Pomodoros completed</span>
+                  </div>
+                </div>
+
+                {/* Subject progress bars */}
+                <div className="bg-gray-50/80 rounded-2xl p-4 border border-gray-100 space-y-3">
+                  <div>
+                    <div className="flex justify-between text-xs font-semibold text-gray-700 mb-1">
+                      <span>Mathematics (Coaching Syllabus)</span>
+                      <span className="text-[#FF758C]">80%</span>
+                    </div>
+                    <div className="w-full bg-gray-200/70 h-2 rounded-full overflow-hidden">
+                      <div className="bg-[#FF758C] h-full rounded-full" style={{ width: '80%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-xs font-semibold text-gray-700 mb-1">
+                      <span>Physics (Theory &amp; Practical)</span>
+                      <span className="text-[#8B5CF6]">60%</span>
+                    </div>
+                    <div className="w-full bg-gray-200/70 h-2 rounded-full overflow-hidden">
+                      <div className="bg-[#8B5CF6] h-full rounded-full" style={{ width: '60%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-xs font-semibold text-gray-700 mb-1">
+                      <span>English &amp; Literature</span>
+                      <span className="text-blue-500">70%</span>
+                    </div>
+                    <div className="w-full bg-gray-200/70 h-2 rounded-full overflow-hidden">
+                      <div className="bg-blue-500 h-full rounded-full" style={{ width: '70%' }} />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Desktop Footer */}
-        <footer className="relative z-10 w-full bg-white border-t border-gray-100 pt-20 pb-10 px-12">
-          <div className="max-w-[1200px] mx-auto flex flex-col">
-            <div className="flex justify-between items-start mb-16">
-              <div className="max-w-xs">
-                <div className="flex items-center gap-2 mb-4">
-                  <Logo className="w-8 h-8" iconSize="w-5 h-5" />
-                  <span className="text-xl font-bold tracking-tight text-[#1D1B20]">Study<span className="text-[#FF758C] font-editorial italic font-normal">Bloom</span></span>
+        {/* ========================================================================= */}
+        {/* SECTION E — STUDENT TESTIMONIALS (Uses /images/studybloom/testimonials-bg.webp) */}
+        {/* ========================================================================= */}
+        <section 
+          id="testimonials"
+          className="testimonials-section relative z-10 w-full px-8 lg:px-14 py-28 bg-cover bg-center overflow-hidden border-t border-white/40"
+          style={{ 
+            backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.9)), url('/images/studybloom/testimonials-bg.webp')" 
+          }}
+        >
+          <div className="max-w-[1320px] mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 bg-[#FFF0F5] text-[#FF758C] px-4 py-1.5 rounded-full text-xs font-bold mb-4 border border-pink-100 shadow-xs uppercase tracking-wider gsap-reveal-up">
+              Student Stories
+            </div>
+
+            <h2 className="text-3xl lg:text-5xl font-serif text-[#1D1B20] tracking-tight mb-4 gsap-reveal-up">
+              What Our Students Say
+            </h2>
+
+            <p className="text-gray-600 font-normal text-base lg:text-lg max-w-2xl mx-auto mb-16 leading-relaxed gsap-reveal-up">
+              Real people. Real goals. Real results.
+            </p>
+
+            <div className="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+              {[
+                {
+                  quote: "StudyBloom replaced my anxiety with a calm daily plan. Breaking down physics into 40-minute gentle sessions changed everything for me.",
+                  name: "Sultana A.",
+                  role: "Science Student, Class 10",
+                  avatarBg: "bg-pink-100 text-pink-600",
+                  rating: 5
+                },
+                {
+                  quote: "The interface is so peaceful and encouraging. Seeing my weekly percentage climb keeps me excited to open my laptop every morning.",
+                  name: "Tanjim H.",
+                  role: "SSC Candidate 2026",
+                  avatarBg: "bg-purple-100 text-purple-600",
+                  rating: 5
+                },
+                {
+                  quote: "I used to procrastinate on math coaching homework. With the Today's Plan card and focus timer, I finish on time and with zero stress.",
+                  name: "Nabila R.",
+                  role: "High School Scholar",
+                  avatarBg: "bg-rose-100 text-rose-600",
+                  rating: 5
+                }
+              ].map((t, idx) => (
+                <div 
+                  key={idx}
+                  className="testimonial-card bg-white/95 backdrop-blur-xl rounded-[28px] p-7 border border-white/80 shadow-[0_12px_36px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_45px_rgba(255,117,140,0.12)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Stars */}
+                    <div className="flex gap-1 text-amber-400 mb-4">
+                      {[...Array(t.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      ))}
+                    </div>
+
+                    <p className="text-gray-700 text-sm leading-relaxed italic font-serif mb-6">
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${t.avatarBg}`}>
+                      {t.name[0]}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-[#1D1B20] leading-tight">{t.name}</h4>
+                      <p className="text-xs text-gray-400">{t.role}</p>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-500 leading-relaxed font-medium mb-6">
-                  Cultivating a healthier, more productive study culture for ambitious students everywhere.
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* SECTION F — FINAL CALL TO ACTION (Uses /images/studybloom/future-cta-bg.webp) */}
+        {/* ========================================================================= */}
+        <section 
+          id="cta"
+          className="final-cta-section relative z-10 w-full px-8 lg:px-14 py-32 bg-cover bg-center overflow-hidden border-t border-white/40"
+          style={{ 
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.4)), url('/images/studybloom/future-cta-bg.webp')" 
+          }}
+        >
+          <div className="max-w-[900px] mx-auto text-center relative z-10 text-white gsap-reveal-up">
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-1.5 rounded-full text-xs font-bold mb-6 drop-shadow-sm uppercase tracking-widest">
+              🌸 Begin Your Academic Bloom
+            </div>
+
+            <h2 className="text-4xl lg:text-6xl font-serif text-white tracking-tight drop-shadow-md mb-4 leading-tight">
+              Start Your Study Journey Today
+            </h2>
+
+            <p className="text-white/90 font-medium text-base lg:text-xl max-w-xl mx-auto mb-10 drop-shadow-sm">
+              Small steps today, big dreams tomorrow.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/signup"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white text-[#2D2A32] font-bold text-base shadow-xl shadow-black/20 hover:scale-105 transition-all group"
+              >
+                <span>Get Started</span>
+                <ArrowRight className="w-5 h-5 text-[#2D2A32] group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                href="/login"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white font-semibold text-base hover:bg-white/30 transition-all"
+              >
+                Sign In to Account
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* SECTION G — FOOTER                                                       */}
+        {/* ========================================================================= */}
+        <footer className="relative z-10 w-full bg-[#FAF9F6] border-t border-pink-100/60 pt-20 pb-12 px-8 lg:px-14">
+          <div className="max-w-[1320px] mx-auto flex flex-col">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
+              {/* Brand Column */}
+              <div className="max-w-sm">
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className="text-[#FF758C]">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2C12 2 8 8 8 13C8 17.5 12 20 12 20C12 20 16 17.5 16 13C16 8 12 2 12 2Z" />
+                      <path d="M12 20C9.5 20 4 17.5 3 13C2 9.5 5 7 5 7C5 7 6.5 11 9 13.5" />
+                      <path d="M12 20C14.5 20 20 17.5 21 13C22 9.5 19 7 19 7C19 7 17.5 11 15 13.5" />
+                    </svg>
+                  </div>
+                  <span className="text-xl font-bold tracking-tight text-[#1D1B20]">
+                    Study<span className="text-[#FF758C] font-editorial italic font-normal">Bloom</span>
+                  </span>
+                </div>
+                
+                <p className="text-sm text-gray-500 leading-relaxed font-normal mb-6">
+                  Cultivating a gentle, empowering, and focused study routine for ambitious students everywhere. Small steps every day.
                 </p>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-[#FFF0F5] hover:text-[#FF758C] transition-colors cursor-pointer" aria-label="X (Twitter)">
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+
+                {/* Social icons */}
+                <div className="flex gap-3">
+                  <div className="w-9 h-9 rounded-full bg-white border border-gray-200/80 flex items-center justify-center text-gray-400 hover:bg-[#FFF0F5] hover:text-[#FF758C] hover:border-pink-200 transition-colors cursor-pointer" aria-label="X (Twitter)">
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-[#FFF0F5] hover:text-[#FF758C] transition-colors cursor-pointer" aria-label="Instagram">
-                    <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <div className="w-9 h-9 rounded-full bg-white border border-gray-200/80 flex items-center justify-center text-gray-400 hover:bg-[#FFF0F5] hover:text-[#FF758C] hover:border-pink-200 transition-colors cursor-pointer" aria-label="Instagram">
+                    <svg className="w-3.5 h-3.5 stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                       <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
                     </svg>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-[#FFF0F5] hover:text-[#FF758C] transition-colors cursor-pointer" aria-label="YouTube">
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <div className="w-9 h-9 rounded-full bg-white border border-gray-200/80 flex items-center justify-center text-gray-400 hover:bg-[#FFF0F5] hover:text-[#FF758C] hover:border-pink-200 transition-colors cursor-pointer" aria-label="YouTube">
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                   </div>
                 </div>
               </div>
-              
-              <div className="flex gap-16">
-                <div className="flex flex-col gap-4">
-                  <h4 className="font-bold text-[#1D1B20] mb-2">Platform</h4>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Dashboard</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Focus Timer</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Analytics</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Virtual Library</span>
+
+              {/* Navigation Columns */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-10 lg:gap-14">
+                {/* Quick Links */}
+                <div className="flex flex-col gap-3">
+                  <h4 className="font-bold text-sm text-[#1D1B20] mb-1">Quick Links</h4>
+                  <a href="#" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Home</a>
+                  <a href="#study-plan" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Study Plan</a>
+                  <a href="#features" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Resources</a>
+                  <a href="#about" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">About</a>
                 </div>
-                <div className="flex flex-col gap-4">
-                  <h4 className="font-bold text-[#1D1B20] mb-2">Resources</h4>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Study Guides</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Blog</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Help Center</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Community</span>
+
+                {/* Features Links */}
+                <div className="flex flex-col gap-3">
+                  <h4 className="font-bold text-sm text-[#1D1B20] mb-1">Platform Tools</h4>
+                  <a href="#features" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Smart Study Planner</a>
+                  <a href="#features" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">AI Study Assistant</a>
+                  <a href="#features" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Class &amp; Exam Tracker</a>
+                  <a href="#features" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Notes &amp; Resources</a>
                 </div>
-                <div className="flex flex-col gap-4">
-                  <h4 className="font-bold text-[#1D1B20] mb-2">Company</h4>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">About Us</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Careers</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Privacy Policy</span>
-                  <span className="text-sm text-gray-500 hover:text-[#FF758C] transition-colors cursor-pointer font-medium">Terms of Service</span>
+
+                {/* Account & Support */}
+                <div className="flex flex-col gap-3 col-span-2 md:col-span-1">
+                  <h4 className="font-bold text-sm text-[#1D1B20] mb-1">Account</h4>
+                  <Link href="/login" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Log In</Link>
+                  <Link href="/signup" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Sign Up</Link>
+                  <a href="#testimonials" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Student Stories</a>
+                  <a href="#cta" className="text-xs text-gray-500 hover:text-[#FF758C] transition-colors font-medium">Get Started</a>
                 </div>
               </div>
             </div>
-            
-            <div className="w-full pt-8 border-t border-gray-100 flex justify-between items-center text-sm font-medium text-gray-400">
+
+            {/* Bottom Bar */}
+            <div className="w-full pt-8 border-t border-gray-200/70 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-medium text-gray-400">
               <p>© 2026 StudyBloom Inc. All rights reserved.</p>
-              <p className="flex items-center gap-1">Made with <Heart className="w-4 h-4 text-[#FF758C]" fill="#FF758C" /> for students.</p>
+              <p className="flex items-center gap-1.5">
+                <span>Designed with</span>
+                <Heart className="w-3.5 h-3.5 text-[#FF758C]" fill="#FF758C" />
+                <span>for students worldwide.</span>
+              </p>
             </div>
           </div>
         </footer>
